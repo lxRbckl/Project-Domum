@@ -9,9 +9,8 @@ from discord.ext.commands import Bot
 
 
 uid = ''
-admin = ''
 domum = Bot(command_prefix = uid, intents = Intents.all())
-token = ''
+token = 'ODY0MzQwODI4ODc2NTcwNjQ2.YO0CIA.jOKBwIqE4gK0Zsv-7DQobTmoTSI'
 
 
 @domum.event
@@ -126,29 +125,10 @@ async def domumSet(ctx, *args):
     if (str(ctx.author) in dictVariable['Admin']):
 
         for arg in [i for i in dictVariable.keys()] if (args[1:] == []) else args[1:]:
-    
-            if (arg in dictVariable.keys()):
-    
-                dictVariable[arg][0] = args[0].title()
-                
-            else:
-                
-                await ctx.channel.send('{} does not exist.'.format(arg), delete_after = 60)
+        
+            dictVariable[arg][0] = args[0].title() if (arg in dictVariable.keys()) else (None)
         
         await jsonDump(dictVariable)
-
-    
-@domum.command(aliases = ['status', 'Status'])
-async def domumStatus(ctx):
-    '''  '''
-        
-    dictVariable = await jsonLoad()
-    
-    if (str(ctx.author) in dictVariable['Admin']):
-
-        strVariable = ''.join('{} {} {}\n'.format(i, j[0], j[2]) for i, j in dictVariable.items())
-    
-        await ctx.channel.send('```{}```'.format(strVariable), delete_after = 60)
 
 
 domum.run(token)
