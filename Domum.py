@@ -8,10 +8,10 @@ from json import load, dump
 from discord.ext.commands import Bot
 
 
-uid = 'Office'
-admin = 'Germx5000#5554'
+uid = ''
+admin = ''
 domum = Bot(command_prefix = uid, intents = Intents.all())
-token = 'ODY0MzQwODI4ODc2NTcwNjQ2.YO0CIA.Wd4VbbvzR67ISPFp9fE-o7vCzeQ'
+token = ''
 
 
 @domum.event
