@@ -130,7 +130,6 @@ async def domumSet(ctx, *args):
             if (arg in dictVariable.keys()):
     
                 dictVariable[arg][0] = args[0].title()
-                await domumStatus(ctx, arg)
                 
             else:
                 
