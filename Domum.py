@@ -10,7 +10,7 @@ from discord.ext.commands import Bot
 
 uid = ''
 domum = Bot(command_prefix = uid, intents = Intents.all())
-token = 'ODY0MzQwODI4ODc2NTcwNjQ2.YO0CIA.jOKBwIqE4gK0Zsv-7DQobTmoTSI'
+token = 'ODY0MzQwODI4ODc2NTcwNjQ2.YO0CIA.7z9MlDu5px2XgwCqX3xaBOQTMXk'
 
 
 @domum.event
@@ -49,7 +49,7 @@ async def jsonDump(arg):
 
 
 @domum.command()
-async def addAdmin(ctx, arg):
+async def domumAddAdmin(ctx, arg):
     ''' arg : str '''
 
     dictVariable = await jsonLoad()
@@ -62,7 +62,7 @@ async def addAdmin(ctx, arg):
     
 
 @domum.command()
-async def removeAdmin(ctx, arg):
+async def domumRemoveAdmin(ctx, arg):
     ''' arg : str '''
    
     dictVariable = await jsonLoad()
@@ -75,7 +75,7 @@ async def removeAdmin(ctx, arg):
 
 
 @domum.command()
-async def showAdmin(ctx):
+async def domumShowAdmin(ctx):
     '''  '''
     
     dictVariable = await jsonLoad()
@@ -87,8 +87,8 @@ async def showAdmin(ctx):
         await ctx.channel.send(strVariable, delete_after = 60)
     
 
-@domum.command(aliases = ['add', 'Add', '+'])
-async def domumAppend(ctx, *args):
+@domum.command(aliases = ['add', 'Add'])
+async def domumAdd(ctx, *args):
     ''' args[0] : str
         args[1] : int '''
     
@@ -102,8 +102,8 @@ async def domumAppend(ctx, *args):
         await ctx.channel.send('{} was added.'.format(args[0]), delete_after = 60)    
 
 
-@domum.command(aliases = ['delete', 'Delete', '-'])
-async def domumRemove(ctx, arg):
+@domum.command(aliases = ['delete', 'Delete'])
+async def domumDelete(ctx, arg):
     ''' arg : str '''
     
     dictVariable = await jsonLoad()
