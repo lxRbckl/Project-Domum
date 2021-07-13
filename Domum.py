@@ -18,13 +18,13 @@ async def on_ready():
         
     GPIO.setmode(GPIO.BOARD)
     dictVariable = await jsonLoad()
-    for value in dictVariable.values():
+    for value in dictVariable['Data'].values():
         
         GPIO.setup(value[1], True if (value[0] == 'On') else (False))
     
     while (True):
         
-        for value in dictVariable.values():
+        for value in dictVariable['Data'].values():
             
             GPIO.output(value[1], True if (value[0] == 'On') else (False))
             
