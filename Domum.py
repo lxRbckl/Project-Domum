@@ -1,22 +1,34 @@
 # Project Domum by Alex Arbuckle
 
 
+import RPi.GPIO as GPIO
 from asyncio import sleep
+from discord import Intents
 from json import load, dump
-from discord import utils, Intents
 from discord.ext.commands import Bot
 
 
-uid = ''
-admin = ''
+uid = 'Office'
+admin = 'Germx5000#5554'
 domum = Bot(command_prefix = uid, intents = Intents.all())
-token = ''
+token = 'ODY0MzQwODI4ODc2NTcwNjQ2.YO0CIA.Wd4VbbvzR67ISPFp9fE-o7vCzeQ'
 
 
 @domum.event
 async def on_ready():
     
-    # await sleep(2)
+    GPIO.setmode(GPIO.BOARD)
+    dictVariable = await jsonLoad()
+    for value in dictVariable.values():
+        
+        GPIO.setup(value[1], True if (value[0] == 'On') else (False))
+    
+    while (True):
+        
+        for value in dictVariable.values():
+            
+            GPIO.output(value[1], True if (value[0] == 'On') else (False))
+            await sleep(30)
 
 
 async def jsonLoad():
@@ -63,7 +75,7 @@ async def domumSet(ctx, *args):
     ''' args[n] : str '''
     
     dictVariable = await jsonLoad()
-    for arg in [i for i in dictVariable.keys()] if (args == []) else args[1:]:
+    for arg in [i for i in dictVariable.keys()] if (args[1:] == []) else args[1:]:
 
         if (arg in dictVariable.keys()):
 
