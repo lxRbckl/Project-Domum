@@ -10,7 +10,7 @@ from discord.ext.commands import Bot
 
 uid = ''
 domum = Bot(command_prefix = uid, intents = Intents.all())
-token = 'ODY0MzQwODI4ODc2NTcwNjQ2.YO0CIA.7z9MlDu5px2XgwCqX3xaBOQTMXk'
+token = ''
 
 
 @domum.event
