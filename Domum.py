@@ -18,10 +18,6 @@ async def on_ready():
             
     #GPIO.setmode(GPIO.BOARD)
     dictVariable = await jsonLoad()
-    #for value in dictVariable.values():
-        
-        #GPIO.setup(value['Pin'], True if (value[0] == 'On') else (False))
-
     while (True):
         
         for value in dictVariable.values():
@@ -29,7 +25,7 @@ async def on_ready():
             #GPIO.output(value['Pin'], True if (value[0] == 'On') else (False))
     
         dictVariable = await jsonLoad()
-        await sleep(30)
+        await sleep(15)
 
 
 async def jsonLoad(): # *
@@ -45,7 +41,7 @@ async def jsonDump(arg): # *
 
     with open('Domum.json', 'w') as fileVariable:
         
-        dump(arg, fileVariable, indent=4)
+        dump(arg, fileVariable, indent = 4)
 
 
 @domum.command(aliases = ['add', 'Add']) # *
