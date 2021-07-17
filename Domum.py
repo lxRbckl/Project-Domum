@@ -5,35 +5,60 @@
 var = ctime().split()
 print(var)'''
 
+from suntime import Sun
 #mport RPi.GPIO as GPIO
 from asyncio import sleep
 from discord import Intents
 from json import load, dump
-from time import time, ctime
+from datetime import datetime
 from discord.ext.commands import Bot
 
 
 uid = ''
+lat, lon = 39, -94
 domum = Bot(command_prefix = uid, intents = Intents.all())
-token = ''
+token = 'ODY0MzQwODI4ODc2NTcwNjQ2.YO0CIA.jDnZsFDaAsTJP0QLjdR1JpgQf_A'
 
 
-'''@domum.event
+@domum.event
 async def on_ready():
             
     #GPIO.setmode(GPIO.BOARD)
-    dictVariable = await jsonLoad()
     while (True):
-        
-        for value in dictVariable.values():
-            
-            #GPIO.output(value['Pin'], True if (value[0] == 'On') else (False))
-    
+
         dictVariable = await jsonLoad()
-        await sleep(15)'''
+        for key in dictVariable.keys():
+
+            timeCurrent = str(datetime.now()).split()[1].split(':')
+            timeSunset = str(Sun(lat, lon).get_sunset_time()).split()[1].split(':')
+            timeSunrise = str(Sun(lat, lon).get_sunrise_time()).split()[1].split(':')
+
+            timeCurrent = '{}{}'.format(int(timeCurrent[0]), timeCurrent[1])
+            timeSunset = '{}{}'.format(((int(timeSunset[0]) + 7) % 12), timeSunset[1])
+            timeSunrise = '{}{}'.format(((int(timeSunrise[0]) + 7) % 12), timeSunrise[1])
+
+            # Schedule #
+            if (timeCurrent in dictVariable[key]['Schedule'].keys()):
+
+                dictVariable[key]['Status'] = dictVariable[key]['Schedule'][timeCurrent]
+
+            # Night Cycle # Sunset #
+            if (timeCurrent == timeSunset):
+
+                dictVariable[key]['Status'] = True
+
+            # Night Cycle # Sunrise #
+            if (timeCurrent == timeSunrise):
+
+                dictVariable[key]['Status'] = False
+
+            # Manual Cycle #
+            #GIPO.output(value['Pin'], True if (value['Status'] == 'On') else (False))
+
+        await sleep(15)
 
 
-async def jsonLoad(): # *
+async def jsonLoad():
     '''  '''
 
     with open('Domum.json', 'r') as fileVariable:
@@ -41,7 +66,7 @@ async def jsonLoad(): # *
         return load(fileVariable)
 
 
-async def jsonDump(arg): # *
+async def jsonDump(arg):
     ''' arg : dict '''
 
     with open('Domum.json', 'w') as fileVariable:
@@ -49,8 +74,8 @@ async def jsonDump(arg): # *
         dump(arg, fileVariable, indent = 4)
 
 
-@domum.command(aliases = ['add', 'Add']) # *
-async def domumAdd(ctx, *args):
+@domum.command(aliases = ['addPin'])
+async def domumAddPin(ctx, *args):
     ''' args[0] : str
         args[1] : int '''
     
@@ -70,8 +95,8 @@ async def domumAdd(ctx, *args):
         await ctx.channel.send('{} already exists.'.format(args[0]), delete_after = 60)
     
 
-@domum.command(aliases = ['delete', 'Delete']) # *
-async def domumDelete(ctx, arg):
+@domum.command(aliases = ['deletePin'])
+async def domumDeletePin(ctx, arg):
     ''' arg : str '''
     
     dictVariable = await jsonLoad()
@@ -86,10 +111,27 @@ async def domumDelete(ctx, arg):
     else:
         
         await ctx.channel.send('{} does not exist.'.format(arg), delete_after = 60)
+
+
+@domum.command(aliases = ['showPin'])
+async def domumShowPin(ctx, arg):
+    ''' arg : str '''
+
+    dictVariable = await jsonLoad()
+
+    if (arg in dictVariable.keys()):
+
+        strVariable = '{} : Pin : {}'.format(arg, dictVariable[arg]['Pin'])
+
+        await ctx.channel.send(strVariable, delete_after = 60)
+
+    else:
+
+        await ctx.channel.send('{} does not exist.'.format(arg), delete_after = 60)
         
 
-@domum.command(aliases = ['set', 'Set']) # *
-async def domumSet(ctx, *args):
+@domum.command(aliases = ['setPin'])
+async def domumSetPin(ctx, *args):
     ''' args[n] : str
         args[-1] : str '''
     
@@ -109,7 +151,7 @@ async def domumSet(ctx, *args):
             await ctx.channel.send('{} does not exist'.format(arg), delete_after = 60)
 
 
-@domum.command(aliases = ['add schedule', 'Add Schedule'])
+@domum.command(aliases = ['addSchedule'])
 async def domumAddSchedule(ctx, *args):
     ''' args[0] : str
         args[1] : bool | str
@@ -137,7 +179,7 @@ async def domumAddSchedule(ctx, *args):
         await ctx.channel.send('{} does not exist.'.format(args[0]), delete_after = 60)
         
 
-@domum.command(aliases = ['delete schedule', 'Delete Schedule'])
+@domum.command(aliases = ['deleteSchedule'])
 async def domumDeleteSchedule(ctx, *args):
     ''' args[0] : str
         args[1] : int '''
@@ -145,30 +187,45 @@ async def domumDeleteSchedule(ctx, *args):
     dictVariable = await jsonLoad()
     
     if (args[0] in dictVariable.keys()):
+
+        if (type(dictVariable[args[0]]['Schedule']) == bool):
+
+            await ctx.channel.send('{} has no schedule.'.format(args[0]), delete_after = 60)
+
+        else:
         
-        dictVariable[args[0]]['Schedule'].pop(args[1])
-        
-        await jsonDump(dictVariable)
-        await ctx.channel.send('{} was removed from {}.'.format(args[1], args[0]), delete_after = 60)
+            dictVariable[args[0]]['Schedule'].pop(args[1])
+
+            await jsonDump(dictVariable)
+            await ctx.channel.send('{} was removed from {}.'.format(args[1], args[0]), delete_after = 60)
     
     else:
         
         await ctx.channel.send('{} does not exist'.format(args[0]), delete_after = 60)
 
 
-@domum.command(aliases = ['show schedule', 'Show Schedule'])
+@domum.command(aliases = ['showSchedule'])
 async def domumShowSchedule(ctx, arg):
     ''' arg : str '''
     
     dictVariable = await jsonLoad()
     
     if (arg in dictVariable.keys()):
-        
-        #strVariable = ''.join('{}\t{} {}'.format())
-        # TODO
-        # comprehension to join all scheduled times together
-        # then move on incorporating them into the on_ready algorithm.
+
+        if (type(dictVariable[arg]['Schedule']) == bool):
+
+            strVariable = 'Night Cycle' if (dictVariable[arg]['Schedule'] == True) else ('Manual Cycle')
+
+        else:
+
+            strVariable = f'{arg}\n\n'
+            strVariable += ''.join(f'{c}\t{i[0]} {i[1]}' for c, i in enumerate(dictVariable[arg]['Schedule']))
+
+        await ctx.channel.send(strVariable, delete_after = 60)
     
     else:
         
         await ctx.channel.send('{} does not exist.'.format(arg), delete_after = 60)
+
+
+domum.run(token)
