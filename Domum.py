@@ -15,9 +15,9 @@ from discord.ext.commands import Bot
 
 
 uid = ''
-lat, lon = 39, -94
+lat, lon = 1, 1
 domum = Bot(command_prefix = uid, intents = Intents.all())
-token = 'ODY0MzQwODI4ODc2NTcwNjQ2.YO0CIA.jDnZsFDaAsTJP0QLjdR1JpgQf_A'
+token = ''
 
 
 @domum.event
