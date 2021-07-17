@@ -1,10 +1,6 @@
 # Project Domum by Alex Arbuckle
 
 
-'''#domum.run(token)
-var = ctime().split()
-print(var)'''
-
 from suntime import Sun
 #mport RPi.GPIO as GPIO
 from asyncio import sleep
