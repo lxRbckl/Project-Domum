@@ -1,3 +1,7 @@
 {
-    
+    "test": {
+        "Status": "Off",
+        "Schedule": false,
+        "Pin": 9
+    }
 }
