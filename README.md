@@ -1,7 +1,4 @@
-# Project-Domum
-## Lea
-< m
-> m
+# Project-Domum ## ok
 
 ```
 Ubuntu Server 20.04
