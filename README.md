@@ -1,6 +1,7 @@
 ## Project Domum
 > purpose
 
+## Installation
 ```
 Ubuntu Server 20.04
 
