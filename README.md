@@ -1,6 +1,5 @@
-# Project-Domum
-this is whta t 
--------
+# Project-Domum <h1> ok
+
 ```
 Ubuntu Server 20.04
 
