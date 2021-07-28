@@ -2,7 +2,7 @@
 ## Lea
 
 ```
-Ubuntu Server 20.04
+#Ubuntu Server 20.04
 
 pip3 install RPi
 pip3 install discord.py
