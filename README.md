@@ -1,5 +1,5 @@
 ## Project Domum
-< purpose
+> purpose
 
 ```
 Ubuntu Server 20.04
