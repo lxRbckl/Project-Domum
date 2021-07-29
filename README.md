@@ -1,5 +1,5 @@
 ## Project Domum
-> Control an arbitrary amount of relays through relays with a Discord bot.
+> Control an arbitrary amount of relays with a Discord bot.
 
 ## Installation
 ```
