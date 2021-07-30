@@ -9,5 +9,5 @@ pip3 install RPi
 pip3 install discord.py
 sudo apt-get -y install python3-rpi.gpio
 
-git clone 
+git clone https://github.com/lxRbckl/Project-Domum.git
 ```
