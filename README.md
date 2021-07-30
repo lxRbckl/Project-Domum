@@ -1,4 +1,4 @@
-## [Project Domum](https://guides.github.com/features/mastering-markdown/)
+## Project Domum
 > Control an arbitrary amount of relays with a Discord bot.
 
 ## Installation
