@@ -1,3 +1,11 @@
 {
-
+    "man": {
+        "Pin": "False",
+        "isSolar": "False",
+        "isTimer": "True",
+        "isManual": "False",
+        "timerOn": "False",
+        "timerOff": "False",
+        "isOnline": "False"
+    }
 }

@@ -109,11 +109,9 @@ async def on_ready():
 
                 # >
 
-            # Condition Update <
-            if (await jsonLoad() != dictVariable):
-
                 #GPIO.output(dictVariable[key]['Pin'], dictVariable[key]['isOnline'])
-                await jsonDump(dictVariable)
+
+            await jsonDump(dictVariable) if (await jsonLoad() != dictVariable) else (None)
 
             # >
 
@@ -263,8 +261,8 @@ async def setTimerOn(ctx, *args):
 
             dictVariable[args[0]]['timerOn'] = args[1]
 
-            await jsonDump(dictVariable)
             await ctx.channel.send(f'{args[0]} : timerOn : {args[1]}', delete_after = 60)
+            await jsonDump(dictVariable)
 
         else:
 
@@ -288,8 +286,8 @@ async def setTimerOff(ctx, *args):
 
             dictVariable[args[0]]['timerOff'] = args[1]
 
-            await jsonDump(dictVariable)
             await ctx.channel.send(f'{args[0]} : timerOff : {args[1]}', delete_after = 60)
+            await jsonDump(dictVariable)
 
         else:
 
@@ -313,8 +311,8 @@ async def setOnline(ctx, *args):
 
             dictVariable[args[0]]['isOnline'] = True if (args[1] == 'True') else (False)
 
-            await jsonDump(dictVariable)
             await ctx.channel.send(f'{args[0]} : isOnline : {args[1]}', delete_after = 60)
+            await jsonDump(dictVariable)
 
         else:
 
