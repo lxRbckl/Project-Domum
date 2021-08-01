@@ -14,5 +14,9 @@ pip3 install suntime
 pip3 install discord.py
 sudo apt-get -y install python3-rpi.gpio
 
+cd
 git clone https://github.com/lxRbckl/Project-Domum.git
+
+crontab -e
+@reboot python3 ~/Project-Domum/Domum.py
 ```
