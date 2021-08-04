@@ -3,8 +3,8 @@
 
 ### Installation
 ```
-Raspberry Pi 4
-Ubuntu Server 20.04
+# Raspberry Pi 4
+# Ubuntu Server 20.04
 
 pip3 install RPi
 pip3 install suntime
