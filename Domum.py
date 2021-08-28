@@ -14,7 +14,7 @@ from discord.ext.commands import Bot
 
 
 # Declaration <
-#GPIO.setmode(GPIO.board)
+GPIO.setmode(GPIO.board)
 uid, lat, lon = '', 0, 0
 domum = Bot(command_prefix = uid, intents = Intents.all())
 token = ''
