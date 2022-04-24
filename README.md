@@ -1,7 +1,7 @@
 ## [`Project Domum`](http://lxrbckl.com/Project-Domum)
 > Control an arbitrary amount of GPIO pins with a Discord bot. Spring 2021.
 
-### Installation
+### `Installation`
 ```
 # Raspberry Pi 4
 # Ubuntu Server 20.04
