@@ -1,5 +1,5 @@
 ## [`Project Domum`](http://lxrbckl.com/Project-Domum)
-> Control an arbitrary amount of GPIO pins with a Discord bot. Spring 2021.
+> A Raspberry Pi tool to control an arbitrary amount of GPIO pins using a Discord bot. Spring 2021.
 
 ### `Installation`
 ```
